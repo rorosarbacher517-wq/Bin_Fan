@@ -62,6 +62,31 @@ If PyTorch is unavailable or broken in the local environment, the script writes 
 `skipped` metrics JSON instead of failing silently. This keeps the repository
 reproducible while making the deep-learning upgrade path explicit.
 
+## China multi-region benchmark
+
+The project also includes a scalable benchmark design for larger samples and
+cross-region generalization. Instead of downloading one huge national raster, it
+splits China into climate/operation-oriented tiles and builds one regional graph
+dataset per tile.
+
+Smoke-test benchmark with synthetic towers/weather:
+
+```powershell
+python scripts/build_multiregion_dataset.py --mode demo
+D:\anaconda3\envs\tensorflow\python.exe scripts/experiments/train_tf_temporal_graphsage_multiregion.py --heldout-region southwest_mountains --epochs 4
+```
+
+Real ERA5-Land download by selected regions:
+
+```powershell
+python scripts/download_era5_land_regions.py --regions southwest_mountains central_hills
+python scripts/build_multiregion_dataset.py --mode real --regions southwest_mountains central_hills
+```
+
+The benchmark table keeps `region_id`, `province_hint`, prefixed `line_id`, and
+prefixed `tower_id`, so leave-one-region-out experiments can test whether a
+model trained on several climate zones transfers to an unseen region.
+
 ## Optional real data download
 
 1. Register at the Copernicus Climate Data Store.
@@ -89,6 +114,8 @@ GridWeatherAgent/
   scripts/
     run_demo_pipeline.py
     download_era5_land.py
+    download_era5_land_regions.py
+    build_multiregion_dataset.py
   docs/industry_need_research.md
   src/gridweather/
     config.py

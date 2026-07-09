@@ -1,0 +1,59 @@
+project:
+  name: GridWeather-Agent-China-Benchmark
+  seed: 42
+
+paths:
+  data_dir: data/china_benchmark
+  artifact_dir: artifacts
+
+time:
+  start: "2023-01-01"
+  end: "2023-01-31"
+  frequency: "1H"
+
+demo:
+  n_lines: 2
+  towers_per_line: 24
+  weather_grid_size: 4
+
+era5_land:
+  dataset: reanalysis-era5-land
+  variables:
+    - 2m_temperature
+    - 2m_dewpoint_temperature
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - total_precipitation
+    - surface_pressure
+  product_type: reanalysis
+  format: netcdf
+
+regions:
+  - region_id: southwest_mountains
+    province_hint: Guizhou_Yunnan_Sichuan
+    area: [29.8, 97.0, 22.0, 108.8]
+    climate_note: mountain icing, complex terrain, strong terrain gradients
+  - region_id: central_hills
+    province_hint: Hunan_Hubei_Jiangxi_Henan
+    area: [34.8, 110.0, 24.5, 118.5]
+    climate_note: freezing rain transition zone and dense load corridors
+  - region_id: north_plain_mountains
+    province_hint: Hebei_Shanxi_InnerMongolia
+    area: [42.5, 110.0, 35.0, 119.8]
+    climate_note: cold surge, wind exposure, mountain-plain transitions
+  - region_id: northeast_cold
+    province_hint: Heilongjiang_Jilin_Liaoning
+    area: [53.5, 119.0, 39.5, 134.8]
+    climate_note: long cold season and snow/ice exposure
+  - region_id: northwest_dry_cold
+    province_hint: Gansu_Qinghai_Ningxia
+    area: [39.8, 92.0, 32.0, 107.5]
+    climate_note: high elevation, dry cold, wind and large diurnal range
+  - region_id: east_coastal_load
+    province_hint: Jiangsu_Zhejiang_Anhui_Fujian
+    area: [35.2, 116.0, 24.0, 123.5]
+    climate_note: dense load centers and coastal humidity
+  - region_id: south_humid
+    province_hint: Guangdong_Guangxi_Hainan
+    area: [26.5, 107.0, 18.0, 115.8]
+    climate_note: humid heat, typhoon wind exposure, low icing baseline
