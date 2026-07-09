@@ -9,3 +9,5 @@ cdsapi
 geopandas
 rasterio
 
+# Optional for scripts/experiments/train_temporal_graphsage.py
+# torch

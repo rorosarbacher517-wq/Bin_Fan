@@ -33,6 +33,28 @@ After ERA5-Land has been downloaded and converted, run the real-weather pipeline
 python scripts/run_real_era5_pipeline.py
 ```
 
+## Deep temporal-graph model
+
+The production baseline is a physics-enhanced tabular model. A deeper research
+track is also included:
+
+- PatchTST-style temporal encoder: encodes each tower's previous 24 hours of
+  ERA5-Land weather sequence.
+- IEEE738/DLR physical priors: injects air density, cooling terms, ampacity, and
+  margin features into each tower node.
+- GraphSAGE topology propagation: passes messages along adjacent towers on the
+  same transmission line.
+
+Run it after the real training table has been built:
+
+```powershell
+python scripts/experiments/train_temporal_graphsage.py
+```
+
+If PyTorch is unavailable or broken in the local environment, the script writes a
+`skipped` metrics JSON instead of failing silently. This keeps the repository
+reproducible while making the deep-learning upgrade path explicit.
+
 ## Optional real data download
 
 1. Register at the Copernicus Climate Data Store.
@@ -72,6 +94,7 @@ GridWeatherAgent/
     models/
       train.py
       predict.py
+      temporal_graph.py
     agent/
       explain.py
       report.py
@@ -82,3 +105,7 @@ GridWeatherAgent/
 ## Resume wording
 
 Built GridWeather-Agent, a reproducible weather-to-grid resilience system for transmission corridors. The system integrates ERA5-Land weather, Sentinel-2/NASADEM static features, and line geometry, constructs physics-guided hazard labels, estimates dynamic line rating headroom, trains interpretable risk models, and generates tower-level diagnostic explanations and operational recommendations through an agent-style tool pipeline.
+
+Deep-learning version: extended the baseline with a PatchTST weather-sequence
+encoder and GraphSAGE line-topology model, using IEEE738-like DLR variables as
+power-system physical priors for topology-aware tower risk prediction.
