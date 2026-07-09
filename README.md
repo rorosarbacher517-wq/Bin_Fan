@@ -51,6 +51,13 @@ Run it after the real training table has been built:
 python scripts/experiments/train_temporal_graphsage.py
 ```
 
+If your local deep-learning environment is TensorFlow/Keras rather than
+PyTorch, run:
+
+```powershell
+D:\anaconda3\envs\tensorflow\python.exe scripts/experiments/train_tf_temporal_graphsage.py
+```
+
 If PyTorch is unavailable or broken in the local environment, the script writes a
 `skipped` metrics JSON instead of failing silently. This keeps the repository
 reproducible while making the deep-learning upgrade path explicit.

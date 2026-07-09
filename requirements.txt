@@ -11,3 +11,6 @@ rasterio
 
 # Optional for scripts/experiments/train_temporal_graphsage.py
 # torch
+
+# Optional for scripts/experiments/train_tf_temporal_graphsage.py
+# tensorflow
