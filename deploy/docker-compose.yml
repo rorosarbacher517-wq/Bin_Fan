@@ -1,0 +1,28 @@
+services:
+  gridweather-api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../data:/app/data
+      - ../artifacts:/app/artifacts
+    depends_on:
+      - redis
+      - postgis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_PASSWORD: gridweather
+      POSTGRES_USER: gridweather
+      POSTGRES_DB: gridweather
+    ports:
+      - "5432:5432"
+

@@ -1,0 +1,45 @@
+project:
+  name: GridWeather-Agent
+  seed: 42
+
+paths:
+  data_dir: data/smoke
+  artifact_dir: artifacts
+
+region:
+  name: guizhou_bijie_liupanshui_smoke
+  # CDS area order: north, west, south, east
+  area: [27.2, 104.8, 26.7, 105.4]
+
+time:
+  start: "2023-01-01"
+  end: "2023-01-03"
+  frequency: "1H"
+
+demo:
+  n_lines: 2
+  towers_per_line: 20
+  weather_grid_size: 4
+
+era5_land:
+  dataset: reanalysis-era5-land
+  variables:
+    - 2m_temperature
+    - 2m_dewpoint_temperature
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - total_precipitation
+    - surface_pressure
+  product_type: reanalysis
+  format: netcdf
+
+gee:
+  service_account_file: ""
+  service_account_email: ""
+
+model:
+  target: risk_level
+  test_days: 1
+  random_state: 42
+  high_risk_threshold: 2
+

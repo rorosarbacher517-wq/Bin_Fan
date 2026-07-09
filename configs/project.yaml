@@ -1,0 +1,46 @@
+project:
+  name: GridWeather-Agent
+  seed: 42
+
+paths:
+  data_dir: data/demo
+  artifact_dir: artifacts
+
+region:
+  name: guizhou_bijie_liupanshui_mountain
+  # CDS area order: north, west, south, east
+  # Northwest Guizhou mountain corridor, suitable for icing and micro-meteorological risk demos.
+  area: [27.7, 104.3, 26.1, 106.1]
+
+time:
+  start: "2023-01-01"
+  end: "2023-01-21"
+  frequency: "1H"
+
+demo:
+  n_lines: 4
+  towers_per_line: 35
+  weather_grid_size: 5
+
+era5_land:
+  dataset: reanalysis-era5-land
+  variables:
+    - 2m_temperature
+    - 2m_dewpoint_temperature
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - total_precipitation
+    - surface_pressure
+  product_type: reanalysis
+  format: netcdf
+
+gee:
+  # Keep real credentials outside Git. Pass these paths through CLI args or environment variables.
+  service_account_file: ""
+  service_account_email: ""
+
+model:
+  target: risk_level
+  test_days: 5
+  random_state: 42
+  high_risk_threshold: 2
