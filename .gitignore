@@ -11,6 +11,7 @@ artifacts/
 *.tif
 *.zip
 ~$*.docx
+docs/INTERVIEW_DEEP_DIVE.md
 
 .env
 .cdsapirc

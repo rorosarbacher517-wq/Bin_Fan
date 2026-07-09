@@ -29,7 +29,7 @@ Interpretation:
 
 - Tree models perform very strongly because the current label is physics-guided and threshold-like.
 - IEEE738-like features improve the best macro-F1, showing that power-system physical priors are useful.
-- The full prior set is slightly lower than the IEEE738-only set, which is a useful interview discussion about redundant/noisy engineered features.
+- The full prior set is slightly lower than the IEEE738-only set, which is a useful technical discussion about redundant/noisy engineered features.
 
 ### 2.2 TensorFlow PatchTST-GraphSAGE Deep Model
 
@@ -368,7 +368,7 @@ Defines:
 - Trains each feature set.
 - Saves CSV/JSON results.
 
-Interview value:
+Technical value:
 
 - Shows that features are validated incrementally.
 - Avoids the common weakness of simply concatenating all features without evidence.
@@ -597,7 +597,7 @@ D:\anaconda3\envs\tensorflow\python.exe scripts/experiments/train_tf_temporal_gr
 4. Cross-region transfer currently has low macro-F1, which reveals a real domain-shift problem.
 5. Production deployment would need SCADA/load/conductor metadata, real outage/icing records, data governance, and monitoring.
 
-## 8. Why This Project Is Strong For Interviews
+## 8. Why This Project Is Strong For Technical Review
 
 This project can be defended from several angles:
 

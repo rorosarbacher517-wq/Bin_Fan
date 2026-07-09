@@ -14,7 +14,6 @@ Global AI weather models are strong at large-scale forecasting, but power-grid i
 ## Documentation
 
 - [Technical implementation guide](docs/TECHNICAL_IMPLEMENTATION_GUIDE.md): end-to-end data, physics, model, Agent, infrastructure, and code walkthrough.
-- [Interview deep dive](docs/INTERVIEW_DEEP_DIVE.md): role-specific technical interview questions and answers for power grid, AI Lab, algorithm, Agent, and AI Infra roles.
 - [Industry need research](docs/industry_need_research.md): external motivation and business context.
 
 ## Quick start
