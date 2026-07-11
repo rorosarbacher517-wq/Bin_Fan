@@ -14,6 +14,10 @@ Global AI weather models are strong at large-scale forecasting, but power-grid i
 ## Documentation
 
 - [Technical implementation guide](docs/TECHNICAL_IMPLEMENTATION_GUIDE.md): end-to-end data, physics, model, Agent, infrastructure, and code walkthrough.
+- [Agent workflow evaluation](docs/AGENT_EVAL.md): task success, tool-call accuracy, recovery, hallucination, latency, and traceability metrics for the deterministic Agent-ready workflow.
+- [Operator Agent design](docs/OPERATOR_AGENT_DESIGN.md): user needs, tools, skills, and product boundary for power-grid operation staff.
+- [LangGraph-style migration](docs/LANGGRAPH_MIGRATION.md): state-graph architecture and migration path to real LangGraph.
+- [Enterprise runtime layer](docs/ENTERPRISE_RUNTIME.md): task IDs, tool registry, evidence packets, event logs, and mock connector/adapter interfaces.
 - [Industry need research](docs/industry_need_research.md): external motivation and business context.
 
 ## Quick start
@@ -31,6 +35,17 @@ Expected outputs:
 - `artifacts/reports/gridweather_report.html`
 
 Open the HTML report in a browser to inspect high-risk towers and explanations.
+
+Evaluate the Agent-ready workflow metrics:
+
+```powershell
+python scripts/agent_eval/evaluate_agent_workflow.py
+```
+
+Expected evaluation outputs:
+
+- `artifacts/agent_eval/agent_eval_metrics.json`
+- `artifacts/agent_eval/agent_eval_report.md`
 
 After ERA5-Land has been downloaded and converted, run the real-weather pipeline:
 
@@ -141,7 +156,7 @@ GridWeatherAgent/
     test_physics_labels.py
 ```
 
-## Resume wording
+## Project summary
 
 Built GridWeather-Agent, a reproducible weather-to-grid resilience system for transmission corridors. The system integrates ERA5-Land weather, Sentinel-2/NASADEM static features, and line geometry, constructs physics-guided hazard labels, estimates dynamic line rating headroom, trains interpretable risk models, and generates tower-level diagnostic explanations and operational recommendations through an agent-style tool pipeline.
 
