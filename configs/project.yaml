@@ -44,3 +44,36 @@ model:
   test_days: 5
   random_state: 42
   high_risk_threshold: 2
+
+llm:
+  # LLM enhancement is optional and disabled by default so the demo remains fully reproducible offline.
+  # Runtime environment variables override this static design block.
+  enabled_env: GRIDWEATHER_LLM_ENABLED
+  default_provider: deepseek
+  fallback_provider: zhipu
+  domestic_first: true
+  providers:
+    deepseek:
+      api_key_env: DEEPSEEK_API_KEY
+      base_url: https://api.deepseek.com/v1
+      chat_model: deepseek-chat
+      reasoning_model: deepseek-reasoner
+      role: default Chinese planner, summarizer, and operator-answer enhancer
+    zhipu:
+      api_key_env: ZHIPU_API_KEY
+      base_url: https://open.bigmodel.cn/api/paas/v4
+      chat_model: glm-4-plus
+      vision_model: glm-4v-plus
+      role: domestic multimodal fallback for image/PDF-page understanding
+    qwen:
+      api_key_env: DASHSCOPE_API_KEY
+      base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      chat_model: qwen-plus
+      vision_model: qwen-vl-plus
+      role: Alibaba Cloud ecosystem fallback for domestic enterprise deployment
+    openai:
+      api_key_env: OPENAI_API_KEY
+      base_url: https://api.openai.com/v1
+      chat_model: gpt-4.1-mini
+      vision_model: gpt-4o
+      role: optional overseas fallback and multimodal enhancement
