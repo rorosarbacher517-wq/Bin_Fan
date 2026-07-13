@@ -6,6 +6,9 @@ from typing import Any
 import pandas as pd
 
 from gridweather.agent.operator_graph import answer_operator_question
+from gridweather.llm.base import LLMClient
+from gridweather.llm.operator_enhancer import enhance_operator_response
+from gridweather.llm.router import build_llm_client
 from gridweather.runtime.connectors import ConnectorHub
 from gridweather.runtime.observability import EventLogger
 from gridweather.runtime.task_state import TaskStore
@@ -16,7 +19,9 @@ class EnterpriseAgentRuntime:
     """Enterprise runtime wrapper around the operator Agent graph.
 
     This class adds task ids, tool registry, evidence persistence, event logs,
-    and mock enterprise connectors around the current runnable Agent.
+    and mock enterprise connectors around the current runnable Agent. Optional
+    LLM enhancement is domestic-first and disabled by default so the demo remains
+    reproducible without network access.
     """
 
     def __init__(
@@ -25,11 +30,13 @@ class EnterpriseAgentRuntime:
         artifact_dir: Path,
         registry: ToolRegistry | None = None,
         connectors: ConnectorHub | None = None,
+        llm_client: LLMClient | None = None,
     ) -> None:
         self.predictions = predictions
         self.artifact_dir = artifact_dir
         self.registry = registry or default_tool_registry()
         self.connectors = connectors or ConnectorHub.mock()
+        self.llm_client = llm_client if llm_client is not None else build_llm_client()
         self.tasks = TaskStore(artifact_dir / "runtime" / "tasks")
         self.events = EventLogger(artifact_dir / "runtime" / "events.jsonl")
 
@@ -40,6 +47,7 @@ class EnterpriseAgentRuntime:
             with self.events.span("agent.invoke", task_id=task.task_id):
                 response = answer_operator_question(self.predictions, message)
             response = self._attach_mock_connector_context(response)
+            response = enhance_operator_response(response, self.llm_client)
             evidence_packet = self._build_evidence_packet(response)
             evidence_path = self.tasks.save_evidence_packet(task.task_id, evidence_packet)
 
@@ -57,6 +65,8 @@ class EnterpriseAgentRuntime:
                 intent=response.get("intent"),
                 used_tools=task.used_tools,
                 guardrail_flags=task.guardrail_flags,
+                llm_provider=response.get("llm_provider"),
+                llm_model=response.get("llm_model"),
             )
             return {
                 **response,
@@ -104,6 +114,10 @@ class EnterpriseAgentRuntime:
             "missing_info": response.get("missing_info", []),
             "unsupported_tools": response.get("unsupported_tools", []),
             "mock_connector_context": response.get("mock_connector_context", {}),
+            "deterministic_answer": response.get("deterministic_answer"),
+            "llm_provider": response.get("llm_provider"),
+            "llm_model": response.get("llm_model"),
+            "llm_error": response.get("llm_error"),
         }
 
     def _used_tool_specs(self, used_tools: list[str]) -> dict[str, Any]:
