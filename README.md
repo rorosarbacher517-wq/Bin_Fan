@@ -7,6 +7,8 @@ This project is designed as a resume-ready, reproducible engineering project. It
 - `demo`: generate synthetic towers, weather, DEM-like terrain, remote-sensing-like static features, weak physics labels, train a model, predict risk, and produce an HTML report without any account or network access.
 - `real-data`: download ERA5-Land through Copernicus CDS API and use exported GEE/Sentinel/DEM features when credentials and data are ready.
 
+It also includes an optional domestic-first LLM enhancement layer. The default demo remains fully offline. When enabled, DeepSeek, Zhipu GLM, Qwen/DashScope, or OpenAI can rewrite deterministic tool outputs into clearer Chinese operator-facing answers without replacing the grid-weather evidence pipeline.
+
 ## Why this project is useful
 
 Global AI weather models are strong at large-scale forecasting, but power-grid impact is decided by tower-scale terrain, land surface, line direction, conductor thermal headroom, and extreme local weather. GridWeather-Agent focuses on the missing layer between weather fields and grid operational risk.
@@ -16,6 +18,7 @@ Global AI weather models are strong at large-scale forecasting, but power-grid i
 - [Technical implementation guide](docs/TECHNICAL_IMPLEMENTATION_GUIDE.md): end-to-end data, physics, model, Agent, infrastructure, and code walkthrough.
 - [Agent workflow evaluation](docs/AGENT_EVAL.md): task success, tool-call accuracy, recovery, hallucination, latency, and traceability metrics for the deterministic Agent-ready workflow.
 - [Operator Agent design](docs/OPERATOR_AGENT_DESIGN.md): user needs, tools, skills, and product boundary for power-grid operation staff.
+- [Domestic-first LLM provider setup](docs/LLM_PROVIDER_SETUP.md): optional DeepSeek/Zhipu/Qwen/OpenAI configuration and guardrails.
 - [LangGraph-style migration](docs/LANGGRAPH_MIGRATION.md): state-graph architecture and migration path to real LangGraph.
 - [Enterprise runtime layer](docs/ENTERPRISE_RUNTIME.md): task IDs, tool registry, evidence packets, event logs, and mock connector/adapter interfaces.
 - [Industry need research](docs/industry_need_research.md): external motivation and business context.
@@ -52,6 +55,27 @@ After ERA5-Land has been downloaded and converted, run the real-weather pipeline
 ```powershell
 python scripts/run_real_era5_pipeline.py
 ```
+
+## Optional domestic LLM enhancement
+
+The LLM layer is disabled by default. To enable DeepSeek for Chinese operator-answer enhancement:
+
+```powershell
+$env:GRIDWEATHER_LLM_ENABLED="1"
+$env:GRIDWEATHER_LLM_PROVIDER="deepseek"
+$env:GRIDWEATHER_LLM_MODEL="deepseek-chat"
+$env:DEEPSEEK_API_KEY="<your-deepseek-key>"
+python scripts/service/local_demo_server.py
+```
+
+Supported provider routes:
+
+- `deepseek`: default domestic text/planning provider.
+- `zhipu`: domestic GLM provider and future multimodal fallback.
+- `qwen`: DashScope/Qwen compatible mode for Alibaba Cloud environments.
+- `openai`: optional overseas fallback.
+
+See [Domestic-first LLM provider setup](docs/LLM_PROVIDER_SETUP.md) for details.
 
 ## Deep temporal-graph model
 
@@ -136,7 +160,9 @@ GridWeatherAgent/
     download_era5_land.py
     download_era5_land_regions.py
     build_multiregion_dataset.py
-  docs/industry_need_research.md
+  docs/
+    LLM_PROVIDER_SETUP.md
+    industry_need_research.md
   src/gridweather/
     config.py
     data/
@@ -152,6 +178,10 @@ GridWeatherAgent/
     agent/
       explain.py
       report.py
+    llm/
+      router.py
+      openai_compatible.py
+      operator_enhancer.py
   tests/
     test_physics_labels.py
 ```
