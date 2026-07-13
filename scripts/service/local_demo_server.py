@@ -161,62 +161,62 @@ def build_app_html() -> str:
     i18n_json = json.dumps(
         {
             "zh": {
-                "title": "GridWeatherAgent 运维试用版",
-                "aside": "面向电厂/电网运维人员的气象风险诊断 Agent。当前采用 LangGraph-style 状态图，并增加企业级运行时：任务 ID、工具注册、证据包、执行日志和 mock connector。",
-                "topbar": "运维问答试用台",
-                "report": "打开完整风险报告",
-                "hello": "你好，我是 GridWeatherAgent。你可以问我：当前总体风险怎么样？最高风险杆塔有哪些？L02_T034 为什么危险？L00 线路风险如何？哪些杆塔容量裕度不足？也可以测试尚未真实接入的能力，例如未来 24 小时风险或负荷增加 20% 的影响。",
-                "placeholder": "输入运维问题，例如：L02_T034 为什么危险？",
-                "send": "发送",
-                "intent": "意图",
-                "tools": "使用工具",
-                "trace": "图节点",
-                "task": "任务ID",
-                "mock": "已附 mock connector 结果",
-                "failed": "请求失败：",
-                "toolsList": [
-                    "planner：意图识别与任务计划",
-                    "risk_summary：总体风险概览",
-                    "top_risk_ranker：最高风险排序",
-                    "tower_lookup：单杆塔诊断",
-                    "line_risk_aggregator：线路风险汇总",
-                    "capacity_margin_checker：容量裕度检查",
-                    "rag_guideline_retriever：运维规程检索",
-                    "guardrails：证据与安全护栏"
+                "docLang": "zh-CN",
+                "pageTitle": "GridWeatherAgent \u8fd0\u884c\u63a7\u5236\u53f0",
+                "aside": "\u9762\u5411\u7535\u7f51\u8fd0\u7ef4\u7684\u6c14\u8c61\u98ce\u9669 Agent\uff0c\u63d0\u4f9b\u8ba1\u5212\u3001\u5de5\u5177\u8c03\u7528\u3001\u8bc1\u636e\u5305\u3001\u6062\u590d\u5efa\u8bae\u548c\u53cd\u9988\u95ed\u73af\u3002",
+                "cards": [
+                    "\u8ba1\u5212\u5668\uff1a\u610f\u56fe\u8bc6\u522b\u4e0e\u4efb\u52a1\u8ba1\u5212",
+                    "\u5de5\u5177\u6ce8\u518c\u8868\uff1a\u6a21\u5f0f\u3001\u6743\u9650\u4e0e\u53ef\u7528\u6027",
+                    "\u9a8c\u8bc1\u5668\uff1a\u72b6\u6001\u56fe\u3001\u8bc1\u636e\u548c\u5b89\u5168\u62a4\u680f\u68c0\u67e5",
+                    "\u6062\u590d\u7b56\u7565\uff1a\u6f84\u6e05\u95ee\u9898\u3001\u63a5\u53e3\u7f3a\u5931\u548c\u4eba\u5de5\u590d\u6838",
+                    "\u5b66\u4e60\u95ed\u73af\uff1a\u628a\u53cd\u9988\u7d2f\u79ef\u4e3a\u8bc4\u6d4b\u6837\u672c"
                 ],
+                "console": "\u8fd0\u884c\u63a7\u5236\u53f0",
+                "harness": "Harness JSON",
+                "report": "\u98ce\u9669\u62a5\u544a",
+                "hello": "\u8bf7\u8f93\u5165\u8fd0\u7ef4\u95ee\u9898\uff0c\u4f8b\u5982\uff1a\u5f53\u524d\u603b\u4f53\u98ce\u9669\u5982\u4f55\uff1f\u54ea\u4e9b\u6746\u5854\u98ce\u9669\u6700\u9ad8\uff1fL00 \u7ebf\u8def\u98ce\u9669\u600e\u6837\uff1f\u4e5f\u53ef\u4ee5\u8be2\u95ee\u672a\u6765\u98ce\u9669\u3001\u5bb9\u91cf\u88d5\u5ea6\u6216\u8fd0\u7ef4\u7b80\u62a5\u3002",
+                "placeholder": "\u4f8b\u5982\uff1aL00 \u7ebf\u8def\u98ce\u9669",
+                "send": "\u53d1\u9001",
+                "failed": "\u8bf7\u6c42\u5931\u8d25\uff1a",
+                "intent": "\u610f\u56fe",
+                "tools": "\u5de5\u5177",
+                "graph": "\u56fe\u8ffd\u8e2a",
+                "task": "\u4efb\u52a1",
+                "valid": "\u9a8c\u8bc1",
+                "recovery": "\u6062\u590d",
                 "suggestions": [
-                    "当前总体风险怎么样？",
-                    "最高风险杆塔有哪些？",
-                    "L02_T034 为什么危险？",
-                    "L00 线路风险如何？",
-                    "哪些杆塔容量裕度不足？",
-                    "帮我生成一份今天的值班简报"
+                    "\u5f53\u524d\u603b\u4f53\u98ce\u9669\u5982\u4f55\uff1f",
+                    "\u54ea\u4e9b\u6746\u5854\u98ce\u9669\u6700\u9ad8\uff1f",
+                    "L02_T034 \u4e3a\u4ec0\u4e48\u98ce\u9669\u9ad8\uff1f",
+                    "L00 \u7ebf\u8def\u98ce\u9669\u600e\u6837\uff1f",
+                    "\u54ea\u4e9b\u6746\u5854 DLR \u88d5\u5ea6\u4f4e\uff1f",
+                    "\u751f\u6210\u4eca\u5929\u7684\u8fd0\u7ef4\u7b80\u62a5\u3002"
                 ]
             },
             "en": {
-                "title": "GridWeatherAgent Operator Demo",
-                "aside": "A weather-risk diagnostic Agent for power-grid operators. It uses a LangGraph-style state graph with task IDs, tool registry, evidence packets, event logs, and mock connectors.",
-                "topbar": "Operator Q&A Console",
-                "report": "Open Full Risk Report",
-                "hello": "Hello, I am GridWeatherAgent. You can ask: What is the current overall risk? Which towers have the highest risk? Why is L02_T034 risky? What is the risk on line L00? Which towers have low DLR margin?",
-                "placeholder": "Ask an operation question, e.g. Why is L02_T034 risky?",
-                "send": "Send",
-                "intent": "Intent",
-                "tools": "Tools",
-                "trace": "Graph trace",
-                "task": "Task ID",
-                "mock": "mock connector context attached",
-                "failed": "Request failed: ",
-                "toolsList": [
-                    "planner: intent parsing and task planning",
-                    "risk_summary: overall risk summary",
-                    "top_risk_ranker: highest-risk tower ranking",
-                    "tower_lookup: single-tower diagnosis",
-                    "line_risk_aggregator: line-level risk aggregation",
-                    "capacity_margin_checker: DLR margin watch",
-                    "rag_guideline_retriever: operation guideline retrieval",
-                    "guardrails: evidence and safety checks"
+                "docLang": "en",
+                "pageTitle": "GridWeatherAgent Runtime",
+                "aside": "Operator-facing weather-risk Agent with a lightweight Harness: planner, tool registry, validation loop, evidence packet, recovery plan, and feedback capture.",
+                "cards": [
+                    "planner: intent and task plan",
+                    "tool registry: schemas and permissions",
+                    "validator: graph, evidence, and guardrail checks",
+                    "recovery: clarify, connector-required, review",
+                    "learning: feedback to eval candidates"
                 ],
+                "console": "Runtime Console",
+                "harness": "Harness JSON",
+                "report": "Risk report",
+                "hello": "Ask an operation question, such as current risk, top risky towers, L00 line risk, or future-risk capabilities that require mock connectors.",
+                "placeholder": "Example: L00 line risk",
+                "send": "Send",
+                "failed": "Request failed: ",
+                "intent": "intent",
+                "tools": "tools",
+                "graph": "graph",
+                "task": "task",
+                "valid": "valid",
+                "recovery": "recovery",
                 "suggestions": [
                     "What is the current overall risk?",
                     "Which towers have the highest risk?",
@@ -227,41 +227,41 @@ def build_app_html() -> str:
                 ]
             }
         },
-        ensure_ascii=False,
+        ensure_ascii=True,
     )
-    return f"""<!doctype html>
+    html = """<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GridWeatherAgent</title>
 <style>
-body {{ margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #172033; }}
-.app {{ display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }}
-aside {{ background: #101827; color: #e6edf7; padding: 24px; }}
-aside h1 {{ font-size: 22px; margin: 0 0 10px; }}
-aside p {{ color: #b8c4d6; line-height: 1.6; font-size: 14px; }}
-.tool {{ border: 1px solid #31415c; border-radius: 8px; padding: 10px 12px; margin: 10px 0; font-size: 13px; background: #162238; }}
-main {{ display: flex; flex-direction: column; min-width: 0; }}
-.topbar {{ padding: 18px 24px; border-bottom: 1px solid #e1e5eb; background: white; display: flex; justify-content: space-between; gap: 16px; align-items: center; }}
-.topbar strong {{ font-size: 18px; }}
-.topbar a {{ color: #1d65d8; text-decoration: none; font-size: 14px; }}
-.actions {{ display: flex; align-items: center; gap: 10px; }}
-.lang-toggle {{ display: inline-flex; border: 1px solid #cfd7e3; border-radius: 8px; overflow: hidden; background: #fff; }}
-.lang-toggle button {{ border: 0; background: transparent; padding: 7px 10px; cursor: pointer; color: #475569; }}
-.lang-toggle button.active {{ background: #1769e0; color: white; }}
-.chat {{ flex: 1; padding: 24px; overflow: auto; }}
-.msg {{ max-width: 900px; border-radius: 8px; padding: 14px 16px; margin: 0 0 14px; line-height: 1.65; white-space: pre-wrap; }}
-.user {{ background: #dbeafe; margin-left: auto; }}
-.agent {{ background: white; border: 1px solid #e1e5eb; }}
-.meta {{ margin-top: 10px; color: #64748b; font-size: 13px; }}
-.composer {{ background: white; border-top: 1px solid #e1e5eb; padding: 16px 24px; }}
-.chips {{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }}
-.chips button {{ border: 1px solid #cfd7e3; background: #fff; border-radius: 999px; padding: 7px 11px; cursor: pointer; }}
-.inputrow {{ display: flex; gap: 10px; }}
-input {{ flex: 1; border: 1px solid #cfd7e3; border-radius: 8px; padding: 12px 14px; font-size: 15px; }}
-.send {{ border: 0; background: #1769e0; color: white; border-radius: 8px; padding: 0 20px; font-size: 15px; cursor: pointer; }}
-@media (max-width: 800px) {{ .app {{ grid-template-columns: 1fr; }} aside {{ display: none; }} .topbar {{ align-items: flex-start; flex-direction: column; }} }}
+body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #172033; }
+.app { display: grid; grid-template-columns: 330px 1fr; min-height: 100vh; }
+aside { background: #101827; color: #e6edf7; padding: 24px; }
+aside h1 { font-size: 22px; margin: 0 0 10px; }
+aside p { color: #b8c4d6; line-height: 1.6; font-size: 14px; }
+.tool { border: 1px solid #31415c; border-radius: 8px; padding: 10px 12px; margin: 10px 0; font-size: 13px; background: #162238; }
+main { display: flex; flex-direction: column; min-width: 0; }
+.topbar { padding: 18px 24px; border-bottom: 1px solid #e1e5eb; background: white; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.topbar strong { font-size: 18px; }
+.topbar a { color: #1d65d8; text-decoration: none; font-size: 14px; }
+.actions { display: flex; align-items: center; gap: 10px; }
+.lang-toggle { display: inline-flex; border: 1px solid #cfd7e3; border-radius: 8px; overflow: hidden; background: #fff; }
+.lang-toggle button { border: 0; background: transparent; padding: 7px 10px; cursor: pointer; color: #475569; }
+.lang-toggle button.active { background: #1769e0; color: white; }
+.chat { flex: 1; padding: 24px; overflow: auto; }
+.msg { max-width: 900px; border-radius: 8px; padding: 14px 16px; margin: 0 0 14px; line-height: 1.65; white-space: pre-wrap; }
+.user { background: #dbeafe; margin-left: auto; }
+.agent { background: white; border: 1px solid #e1e5eb; }
+.meta { margin-top: 10px; color: #64748b; font-size: 13px; }
+.composer { background: white; border-top: 1px solid #e1e5eb; padding: 16px 24px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.chips button { border: 1px solid #cfd7e3; background: #fff; border-radius: 999px; padding: 7px 11px; cursor: pointer; }
+.inputrow { display: flex; gap: 10px; }
+input { flex: 1; border: 1px solid #cfd7e3; border-radius: 8px; padding: 12px 14px; font-size: 15px; }
+.send { border: 0; background: #1769e0; color: white; border-radius: 8px; padding: 0 20px; font-size: 15px; cursor: pointer; }
+@media (max-width: 800px) { .app { grid-template-columns: 1fr; } aside { display: none; } .topbar { align-items: flex-start; flex-direction: column; } }
 </style>
 </head>
 <body>
@@ -273,13 +273,13 @@ input {{ flex: 1; border: 1px solid #cfd7e3; border-radius: 8px; padding: 12px 1
 </aside>
 <main>
 <div class="topbar">
-<strong id="topbarTitle"></strong>
+<strong id="consoleTitle"></strong>
 <div class="actions">
 <div class="lang-toggle" aria-label="Language">
-<button id="langZh" onclick="setLanguage('zh')">中文</button>
+<button id="langZh" onclick="setLanguage('zh')">&#20013;&#25991;</button>
 <button id="langEn" onclick="setLanguage('en')">EN</button>
 </div>
-<a id="reportLink" href="/report" target="_blank"></a>
+<span><a id="harnessLink" href="/api/harness" target="_blank"></a> | <a id="reportLink" href="/report" target="_blank"></a></span>
 </div>
 </div>
 <div id="chat" class="chat"></div>
@@ -293,95 +293,96 @@ input {{ flex: 1; border: 1px solid #cfd7e3; border-radius: 8px; padding: 12px 1
 </main>
 </div>
 <script>
-const I18N = {i18n_json};
+const I18N = __I18N__;
 let currentLanguage = localStorage.getItem("gridweather_language") || "zh";
-function t(key) {{ return I18N[currentLanguage][key]; }}
-function setLanguage(lang) {{
+function t(key) { return I18N[currentLanguage][key]; }
+function setLanguage(lang) {
   currentLanguage = lang;
   localStorage.setItem("gridweather_language", lang);
-  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-  document.title = t("title");
+  document.documentElement.lang = t("docLang");
+  document.title = t("pageTitle");
   document.getElementById("asideText").textContent = t("aside");
-  document.getElementById("topbarTitle").textContent = t("topbar");
+  document.getElementById("consoleTitle").textContent = t("console");
+  document.getElementById("harnessLink").textContent = t("harness");
   document.getElementById("reportLink").textContent = t("report");
   document.getElementById("input").placeholder = t("placeholder");
   document.getElementById("sendButton").textContent = t("send");
   document.getElementById("langZh").classList.toggle("active", lang === "zh");
   document.getElementById("langEn").classList.toggle("active", lang === "en");
-  renderTools();
+  renderCards();
   renderChips();
-  if (!document.getElementById("chat").children.length) {{
-    addMsg(t("hello"), "agent");
-  }}
-}}
-function renderTools() {{
+  if (!document.getElementById("chat").children.length) addMsg(t("hello"), "agent");
+}
+function renderCards() {
   const toolList = document.getElementById("toolList");
   toolList.innerHTML = "";
-  for (const item of t("toolsList")) {{
+  for (const item of t("cards")) {
     const div = document.createElement("div");
     div.className = "tool";
     div.textContent = item;
     toolList.appendChild(div);
-  }}
-}}
-function renderChips() {{
+  }
+}
+function renderChips() {
   const chips = document.getElementById("chips");
   chips.innerHTML = "";
-  for (const q of t("suggestions")) {{
+  for (const q of t("suggestions")) {
     const btn = document.createElement("button");
     btn.textContent = q;
-    btn.onclick = () => {{ document.getElementById("input").value = q; sendMessage(); }};
+    btn.onclick = () => { document.getElementById("input").value = q; sendMessage(); };
     chips.appendChild(btn);
-  }}
-}}
-function addMsg(text, cls, meta) {{
+  }
+}
+function addMsg(text, cls, meta) {
   const div = document.createElement("div");
   div.className = "msg " + cls;
   div.textContent = text;
-  if (meta) {{
+  if (meta) {
     const m = document.createElement("div");
     m.className = "meta";
     m.textContent = meta;
     div.appendChild(m);
-  }}
+  }
   document.getElementById("chat").appendChild(div);
-  div.scrollIntoView({{behavior: "smooth", block: "end"}});
-}}
-function buildMeta(data) {{
+  div.scrollIntoView({behavior: "smooth", block: "end"});
+}
+function buildMeta(data) {
   const parts = [];
-  if (data.intent) parts.push(t("intent") + "：" + data.intent);
-  if (data.used_tools) parts.push(t("tools") + "：" + data.used_tools.join(", "));
-  if (data.graph_trace) parts.push(t("trace") + "：" + data.graph_trace.join(" -> "));
-  if (data.task_id) parts.push(t("task") + "：" + data.task_id);
-  if (data.mock_connector_context) parts.push(t("mock"));
-  return parts.join("；");
-}}
-async function sendMessage() {{
+  if (data.intent) parts.push(t("intent") + "=" + data.intent);
+  if (data.used_tools) parts.push(t("tools") + "=" + data.used_tools.join(", "));
+  if (data.graph_trace) parts.push(t("graph") + "=" + data.graph_trace.join(" -> "));
+  if (data.task_id) parts.push(t("task") + "=" + data.task_id);
+  if (data.validation) parts.push(t("valid") + "=" + data.validation.passed);
+  if (data.recovery_plan) parts.push(t("recovery") + "=" + data.recovery_plan.strategy);
+  return parts.join("; ");
+}
+async function sendMessage() {
   const input = document.getElementById("input");
   const message = input.value.trim();
   if (!message) return;
   input.value = "";
   addMsg(message, "user");
-  try {{
-    const res = await fetch("/api/chat", {{
+  try {
+    const res = await fetch("/api/chat", {
       method: "POST",
-      headers: {{"Content-Type": "application/json"}},
-      body: JSON.stringify({{message, language: currentLanguage}})
-    }});
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({message, language: currentLanguage})
+    });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "request failed");
     addMsg(data.answer, "agent", buildMeta(data));
-  }} catch (err) {{
+  } catch (err) {
     addMsg(t("failed") + err.message, "agent");
-  }}
-}}
-document.getElementById("input").addEventListener("keydown", e => {{
+  }
+}
+document.getElementById("input").addEventListener("keydown", e => {
   if (e.key === "Enter") sendMessage();
-}});
+});
 setLanguage(currentLanguage);
 </script>
 </body>
 </html>"""
+    return html.replace("__I18N__", i18n_json)
 
 
 def parse_args() -> argparse.Namespace:
